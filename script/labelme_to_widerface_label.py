@@ -53,10 +53,13 @@ def generator(in_path, out_path, train_rate):
         json_name = os.path.join(in_path, filename.split('.')[0] + '.json')
         if not os.path.exists(json_name):
             continue
-        shutil.copy(os.path.join(in_path, filename), os.path.join(train_path))
+
         json_file = open(json_name, "r+", encoding="utf8")
         json_dict = json.loads(json_file.read())
         json_dict.pop("imageData")
+        if(len(json_dict['shapes'])!=5):
+            continue
+        shutil.copy(os.path.join(in_path, filename), os.path.join(train_path))
         train_label_txt.write('# train/' + filename + '\n')
         txt = decode_jsonfile(json_dict)
         train_label_txt.write(txt + '\n')
@@ -66,10 +69,13 @@ def generator(in_path, out_path, train_rate):
         json_name = os.path.join(in_path, filename.split('.')[0] + '.json')
         if not os.path.exists(json_name):
             continue
-        shutil.copy(os.path.join(in_path, filename), os.path.join(val_path))
+
         json_file = open(json_name, "r+", encoding="utf8")
         json_dict = json.loads(json_file.read())
         json_dict.pop("imageData")
+        if (len(json_dict['shapes']) != 5):
+            continue
+        shutil.copy(os.path.join(in_path, filename), os.path.join(val_path))
         val_label_txt.write('# val/' + filename + '\n')
         txt = decode_jsonfile(json_dict)
         val_label_txt.write(txt + '\n')
