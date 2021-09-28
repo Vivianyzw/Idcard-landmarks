@@ -26,7 +26,7 @@ def decode_jsonfile(json_dict):
         elif item['label'] == 'a4':
             output[10] = item['points'][0][0] # pt4 x
             output[11] = item['points'][0][1] # pt4 y
-    output[12] = 0
+    output[12] = 1
     output = [str(round(a, 3)) for a in output]
     output = ' '.join(output)
     return output
@@ -79,7 +79,7 @@ def generator(in_path, out_path, train_rate):
 if __name__ == '__main__':
     in_path = r'D:\Work\Data\label_test'
     out_path = r'D:\Work\Data\idcard'
-    train_rate = 0.7
+    train_rate = 0.9
     generator(in_path, out_path, train_rate)
 
 
